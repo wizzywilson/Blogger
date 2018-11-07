@@ -1,0 +1,54 @@
+@import 'bootstrap';
+
+
+.sign{
+  width: 50%;
+  margin-top: 80px;
+}
+
+.butn{
+  margin-top: 8px;
+}
+
+.links{
+  margin-top: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.centralize{
+  text-align: center;
+}
+
+
+
+.footer {
+  position: relative;
+  bottom:0px;
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-right: 15px;
+}

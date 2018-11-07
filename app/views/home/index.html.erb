@@ -1,0 +1,22 @@
+<% if current_user %>
+
+  <div class="container">
+    <div class="jumbotron centralize">
+      <h1>Welcome to <%= @user.email.split('@').first %>'s page</h1>
+    <%= gravatar_for @user %>
+    <h3><%= @user.email.split('@').first %>'s posts </h3>
+
+  </div>
+  </div>
+<% else %>
+  <div class="container">
+    <div class="jumbotron centralize">
+      <h2><strong>Welcome to the new Social Networking Experience</strong></h2>
+      <h2><small>Check out the new features</small></h2>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="/users/sign_up" role="button">  Sign up  </a>
+      </p>
+    </div>
+
+  </div>
+<% end %>
