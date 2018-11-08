@@ -7,7 +7,10 @@
       <li><%= link_to('Home', home_index_path)  %></li>
       <% if current_user %>
         <li><%= link_to('Edit user', edit_user_registration_path)  %></li>
+
         <li><%= link_to "Cancel account", registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete %></li>
+        <li><%= link_to "Search", home_search_path %></li>
+
       <% end %>
 
     </ul>
@@ -17,6 +20,8 @@
           <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
         </li>
       <% else %>
+
+
         <li>
           <%= link_to('Login', new_user_session_path)  %>
         </li>

@@ -1,0 +1,22 @@
+<h1>All users</h1>
+
+<%= will_paginate @users %>
+
+<ul class="users">
+  <% @users.each do |user| %>
+    <% if user.id!=current_user.id %>
+      <li>
+        <%= gravatar_for(user,50) %>
+        <%= link_to user.first_name %>
+        <% if current_user.admin %>
+          <span>|</span> <%= link_to 'Delete',destroy_user_path(id: user.id), :method => :delete %>
+          <% if !user.admin %>
+            <span>|</span> <%= link_to 'Add as admin',add_admin_path(id: user.id), :method => :post %>
+          <% end %>
+        <% end %>
+
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+<%= will_paginate @users %>
