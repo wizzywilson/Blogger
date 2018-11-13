@@ -3,7 +3,8 @@ class HomeController < ApplicationController
     if current_user
       @user = User.find_by(id: current_user.id)
       @micropost = current_user.microposts.build if current_user
-      @microposts = Micropost.paginate(page: params[:page]) if current_user
+      @microposts = Micropost.where("user_id IN (?) OR user_id= ?", @user.following_ids,@user.id).paginate(page: params[:page]) if current_user
+
     end
   end
 
@@ -25,4 +26,6 @@ class HomeController < ApplicationController
       redirect_to home_search_path
     end
   end
+
+
 end

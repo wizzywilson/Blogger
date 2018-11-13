@@ -7,7 +7,8 @@
     <% if user.id!=current_user.id %>
       <li>
         <%= gravatar_for(user,50) %>
-        <%= link_to user.first_name %>
+        <!-- <%= link_to user.first_name %> -->
+       <%= link_to user.first_name.upcase, account_path(user) %> 
         <% if current_user.admin %>
           <span>|</span> <%= link_to 'Delete',destroy_user_path(id: user.id), :method => :delete %>
           <% if !user.admin %>

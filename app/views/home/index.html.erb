@@ -2,25 +2,10 @@
 
 <div class="container-fluid">
   <div class="row">
-      <div class="col-sm-2">
-        <div class="container-fluid">
-          <div class="row">
-              <div class="col-sm-5 profile_pic">
-                  <%= gravatar_for(@user,60) %>
-              </div>
-              <div class="col-sm-7 profile_atrributes">
-                  <div class="profile_name"> <strong><%= @user.first_name %>SSS</strong> </div>
-                  <div class=""> <%=link_to "View profile", home_index_path %> </div>
-                  <div class=""><%= @user.microposts.length %> Microposts</div>
-              </div>
-          </div>
-        </div>
-        <div >
-            <!-- anything below the profile picture -->
-        </div>
-      </div>
+    <%= render 'layouts/left_side' %>
       <div class="col-sm-9 second_half_page ">
         <%= render 'microposts/micropost_form' %>
+        <h1>Micropost Feeds</h1>
         <%= render 'microposts/micropost' %>
       </div>
   </div>
