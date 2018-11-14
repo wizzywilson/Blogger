@@ -11,7 +11,8 @@
 // about supported directives.
 //
 //= require jquery3
-
+//= require jquery-ui
+//= require jquery_ujs
 //= require bootstrap
 //= require data-confirm-modal
 //= require rails-ujs
