@@ -1,0 +1,6 @@
+<div class="panel">
+  <%= form_for Comment.new, url:comments_path(box_for,type: type) do |f| %>
+  <%= text_field_tag 'content' %>
+  <%= f.submit "Submit", class: "followbtn",style:"visibility: hidden;" %>
+  <% end %>
+</div>

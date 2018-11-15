@@ -1,0 +1,11 @@
+<% if comment.replies.length!=0 %>
+  <% comment.replies.each do |reply| %>
+    <ol>
+      <li id="nested_comments"> <strong><%= link_to reply.user.first_name.upcase %></strong> <span><%=reply.content%> </span> <span>Posted <%= time_ago_in_words(reply.created_at) %> ago.</span> <%= link_to 'edit' %> <%= link_to 'destroy' %> <%= link_to 'reply' %> </li>
+      <%= render 'comments/comment_box_form', box_for: reply,type: 'replies' %>
+        <%= render 'layouts/nested_comments',comment: reply%>
+
+      <% else %>
+    </ol>
+      <% end %>
+  <% end %>

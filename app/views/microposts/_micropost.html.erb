@@ -30,18 +30,19 @@
                 <span class="col-sm-4"> <%= link_to "Comment",class:"flip" %></span>
                 <span class="col-sm-4">Share</span>
               </div>
-              <div class="panel">
-                <%= form_for(Comment.new, url:comments_path(micropost),id:"form_id_here") do |f| %>
-                <div><%= text_field_tag 'content' %></div>
-                <%= f.submit "Submit", class: "btn btn-primary btn-block followbtn",style:"visibility: hidden;" %>
-                <% end %>
-              </div>
+              <%= render 'comments/comment_box_form', box_for: micropost, type: '' %>
               <div class="">
-                <% micropost.comments.each do |t| %>
+                <% micropost.comments.where("parent_id IS ?", nil ).each do |comment| %>
                   <div class="">
-                    <%= t.user.first_name.upcase %>
-                    <%= t.content %>
-                    <span>Posted <%= time_ago_in_words(t.created_at) %> ago.</span>
+                    <strong><%=  link_to comment.user.first_name.upcase %></strong>
+                      <%= comment.content %>
+
+                      <%= render 'comments/comment_box_form', box_for: comment,type: 'replies' %>
+
+
+                          <%= render 'layouts/nested_comments', comment: comment %>
+
+
                   </div>
                 <% end %>
               </div>
