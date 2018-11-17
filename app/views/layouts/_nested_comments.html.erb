@@ -1,8 +1,15 @@
 <% if comment.replies.length!=0 %>
   <% comment.replies.each do |reply| %>
     <ol>
-      <li id="nested_comments"> <strong><%= link_to reply.user.first_name.upcase %></strong> <span><%=reply.content%> </span> <span>Posted <%= time_ago_in_words(reply.created_at) %> ago.</span> <%= link_to 'edit' %> <%= link_to 'destroy' %> <%= link_to 'reply' %> </li>
+
+      <li id="nested_comments"> <strong><%= link_to reply.user.first_name.upcase %></strong> <span><%=reply.content%> </span> <span>Posted <%= time_ago_in_words(reply.created_at) %> ago.</span> <%= link_to 'edit' %> <%= link_to 'destroy',comment_path(reply),method: :patch %> <%= link_to 'reply' %> </li>
+
       <%= render 'comments/comment_box_form', box_for: reply,type: 'replies' %>
+      <div class="suggestion_box row">
+        <span class="col-sm-4"><%= reply.likes.count %><%= link_to "Like",likes_path(reply,type:'comment'),method: :post %></span>
+        <span class="col-sm-4"> <%= link_to "Comment",class:"flip" %></span>
+        <span class="col-sm-4">Share</span>
+      </div>
         <%= render 'layouts/nested_comments',comment: reply%>
 
       <% else %>

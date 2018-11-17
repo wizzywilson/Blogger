@@ -6,8 +6,11 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   self.per_page = 3
-  has_many :microposts
+  has_many :microposts, dependent: :destroy
   default_scope -> { order(created_at: :desc) }
+
+  has_many :likes
+
 
   has_many :active_relationships,  class_name:  "Relationship",
                                    foreign_key: "follower_id",

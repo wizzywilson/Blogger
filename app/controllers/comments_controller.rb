@@ -13,4 +13,12 @@ class CommentsController < ApplicationController
 
     end
   end
+
+  def update
+      @comment=Comment.find_by(id:params[:id])
+      @comment.deleted = true
+      @comment.save
+      redirect_to request.env["HTTP_REFERER"]
+
+  end
 end

@@ -26,7 +26,7 @@
 
               </div>
               <div class="suggestion_box row">
-                <span class="col-sm-4">Like</span>
+                <span class="col-sm-4"><%= micropost.likes.count %><%= link_to "Like",likes_path(micropost,type:'micropost'),method: :post %></span>
                 <span class="col-sm-4"> <%= link_to "Comment",class:"flip" %></span>
                 <span class="col-sm-4">Share</span>
               </div>
@@ -39,7 +39,11 @@
 
                       <%= render 'comments/comment_box_form', box_for: comment,type: 'replies' %>
 
-
+                      <div class="suggestion_box row">
+                        <span class="col-sm-4"><%= comment.likes.count %><%= link_to "Like",likes_path(comment,type:'comment'),method: :post %></span>
+                        <span class="col-sm-4"> <%= link_to "Comment",class:"flip" %></span>
+                        <span class="col-sm-4">Share</span>
+                      </div>
                           <%= render 'layouts/nested_comments', comment: comment %>
 
 

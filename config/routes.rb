@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :microposts do
     member do
       resources :comments
+      resources :likes
     end
   end
   get 'home/search', to: 'home#search'
