@@ -1,4 +1,4 @@
 <%= @results %>
 <% @results.each do |result| %>
-  <option> <%= link_to result.first_name %> </option>
+  <option> <%=  gravatar_for(resut) link_to result.first_name, account_path(result) %> </option>
 <% end %>
