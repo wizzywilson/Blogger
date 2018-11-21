@@ -33,8 +33,16 @@
               <%= render 'comments/comment_box_form', box_for: micropost, type: '' %>
               <div class="">
                 <% micropost.comments.where("parent_id IS ?", nil ).each do |comment| %>
-                  <div class="">
-                    <strong><%=  link_to comment.user.first_name.upcase %></strong>
+                  <ol class="">
+
+
+
+                    <% if comment.deleted %>
+                    <li id="nested_comments"> <strong>UNANIMOUS</strong> <span><%=comment.content%> </span> <span>Posted <%= time_ago_in_words(comment.created_at) %> ago.</span>  </li>
+                    <% else %>
+                          <li id="nested_comments"> <strong><%= link_to comment.user.first_name.upcase %></strong> <span><%= comment.content %> </span> <span>Posted <%= time_ago_in_words(comment.created_at) %> ago.</span> <%= link_to 'edit' %> <%= link_to 'destroy',comment_path(comment),method: :patch %> <%= link_to 'reply' %> </li>
+                    <% end %>
+
                       <%= comment.content %>
 
                       <%= render 'comments/comment_box_form', box_for: comment,type: 'replies' %>
@@ -47,7 +55,7 @@
                           <%= render 'layouts/nested_comments', comment: comment %>
 
 
-                  </div>
+                  </ol>
                 <% end %>
               </div>
   </div>

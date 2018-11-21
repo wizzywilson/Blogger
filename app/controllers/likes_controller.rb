@@ -8,4 +8,8 @@ Comment.find_by(id:params[:id]).likes.build(user_id:current_user.id).save
   end
     redirect_to request.env["HTTP_REFERER"]
   end
+
+  def destroy
+    Like.destroy(params[:id])
+  end
 end

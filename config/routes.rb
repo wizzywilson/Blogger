@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   get 'home/index'
+
   resources :microposts do
     member do
       resources :comments
       resources :likes
     end
   end
-  get 'home/search', to: 'home#search'
+  post 'home/search', to: 'home#search'
   delete '/destroy_user', to: 'home#destroy_user'
   post '/add_admin', to: 'home#add_admin'
 

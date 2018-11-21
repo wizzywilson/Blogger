@@ -15,10 +15,21 @@ class CommentsController < ApplicationController
   end
 
   def update
+    if params[:type] == 'delete'
       @comment=Comment.find_by(id:params[:id])
       @comment.deleted = true
       @comment.save
       redirect_to request.env["HTTP_REFERER"]
+    else
+      @comment=Comment.find_by(id:params[:id])
+      @comment.content=params[:content]
+      @comment.save
+    end
 
   end
+
+  def autocomplete
+    
+  end
+
 end

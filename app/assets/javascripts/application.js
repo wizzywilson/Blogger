@@ -19,3 +19,8 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+
+
+
+alert('dddd')

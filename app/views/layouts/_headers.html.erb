@@ -9,7 +9,24 @@
         <li><%= link_to('Edit user', edit_user_registration_path)  %></li>
 
         <li><%= link_to "Cancel account", registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete %></li>
-        <li><%= link_to "Search", home_search_path %></li>
+
+
+        <li>
+            <input type="text" placeholder="Search" list="states-2" id="search-2"   >
+            <input type="radio" name="search_for" value="Person" checked > <label for="">Person</label>
+            <input type="radio" name="search_for" value="Tag" > <label for="">Tag</label>
+            <input type="radio" name="search_for" value="Post" > <label for="">Post</label>
+
+            <datalist id="states-2">
+                <select id='search_options'>
+                    <option value="Alabama"></option>
+
+                </select>
+            </datalist>
+        </li>
+
+
+        <%= render 'home/search_bar' %>
 
       <% end %>
 

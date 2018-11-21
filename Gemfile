@@ -1,12 +1,15 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+gem "select2-rails"
 gem 'will_paginate',           '3.1.6'
+gem 'popper_js', '~> 1.14.5'
 gem 'bootstrap-will_paginate', '1.0.0'
+gem 'autoprefixer-rails'
 ruby '2.5.1'
 gem 'carrierwave',             '1.2.2'
 gem 'mini_magick',             '4.7.0'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.2.0'
 gem 'jquery-rails'
 gem 'devise'
 gem 'data-confirm-modal'

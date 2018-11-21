@@ -9,7 +9,13 @@ class HomeController < ApplicationController
   end
 
   def search
-    @users = User.paginate(page: params[:page])
+
+      search_term = params[:search_for]
+      option = params[:radio]
+      if option == 'Person'
+        @results = User.where("first_name LIKE ?",search_term.upcase + '%')        
+      end
+
   end
 
   def destroy_user

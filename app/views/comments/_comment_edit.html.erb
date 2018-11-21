@@ -1,0 +1,6 @@
+<div class="panel">
+  <%= form_for box_for, method: :patch do |f| %>
+  <%= text_field_tag 'content',box_for.content %>
+  <%= f.submit "Submit", class: "followbtn",style:"visibility: hidden;" %>
+  <% end %>
+</div>
