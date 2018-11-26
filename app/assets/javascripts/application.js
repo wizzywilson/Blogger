@@ -10,17 +10,98 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery3
-//= require jquery-ui
-//= require jquery_ujs
-//= require bootstrap
-//= require data-confirm-modal
+
+
+
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
+//= require ddSlick
 //= require_tree .
 
+$(document).ready(function(){
+  //select-2
+  $("#tags").select2({
+      tags: true,
+      tokenSeparators: [',', ' ']
+  })
+
+$("#search-2").keyup(function(){
+  // Search results ajax call
+search_bar_ajax_call();
+
+      });
+
+// radio button code
 
 
+      $('#radioBtn a').on('click', function(){
+    var sel = $(this).data('title');
+    var tog = $(this).data('toggle');
+    $('#'+tog).prop('value', sel);
 
-alert('dddd')
+    $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
+    $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
+
+    search_bar_ajax_call();
+
+
+})
+
+//close search
+
+$('.closed').on('click', function(){
+  $('#search-2').val('');
+});
+
+//search bar
+$("#searchbar .search-label").on("click", function(e){
+  e.preventDefault();
+  $("#searchbar").toggleClass("collapsed");
+  $('#states-2').toggle(6);
+
+});
+
+});
+
+//Sharing post
+
+$(document).ready(function(){
+ $("#submit_post").on("click", function(event) {
+    $('#share').click();
+
+$('#tag').val();
+
+  });
+});
+
+
+function search_bar_ajax_call()
+{
+
+var data;
+
+        if($('#search-2').val().length!=0)
+        {
+           data = {search_for : $('#search-2').val(), radio: $('#radioBtn a.active').data('title')}
+
+        }
+        else{
+          data = {search_for : ',', radio: $('#radioBtn a.active').data('title')}
+        }
+
+          $.ajax({
+            url:"/home/search",
+            type: "POST",
+            data: data,
+            success: function(result){
+              console.log(result);
+            },
+            error: function(error){
+              console.log(error);
+            }
+          })
+}

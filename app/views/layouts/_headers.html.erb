@@ -1,49 +1,96 @@
+
+
+
+
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Wizzter</a>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a id="image" class="navbar-brand" href="#"><%= image_tag "square2.gif", size:"50x40", style:"border-radius:4px;" %>   </a>
     </div>
-    <ul class="nav navbar-nav">
-      <li><%= link_to('Home', home_index_path)  %></li>
-      <% if current_user %>
-        <li><%= link_to('Edit user', edit_user_registration_path)  %></li>
-
-        <li><%= link_to "Cancel account", registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete %></li>
 
 
-        <li>
-            <input type="text" placeholder="Search" list="states-2" id="search-2"   >
-            <input type="radio" name="search_for" value="Person" checked > <label for="">Person</label>
-            <input type="radio" name="search_for" value="Tag" > <label for="">Tag</label>
-            <input type="radio" name="search_for" value="Post" > <label for="">Post</label>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+<% if current_user %>
+            <li class="nav-item" >
+                <%= link_to 'Home', home_index_path, method: :get %>
+            </li>
 
-            <datalist id="states-2">
-                <select id='search_options'>
-                    <option value="Alabama"></option>
+          </ul>
 
-                </select>
-            </datalist>
-        </li>
+          <ul class="nav navbar-nav navbar-right">
+
+            <li id="search_li" >
+              <div id="searchbar" class="collapsed">
+                 <div id="search-box">
+                   <div id="sliding-panel-outer">
+                     <div id="sliding-panel-inner">
+                       <input type="text"  id="search-2"  class="form-control mr-sm-2" placeholder="Search" />
+                      </div><!--#sliding-panel-inner-->
+                   </div><!--#sliding-panel-outer-->
+
+                    <div class="search-label nav-item">
+                      <a href="#"><i class="fa fa-search" id="colour"></i></a>
+                      <a href="#"><i class="fa fa-times closed" style="color:black;"></i></a>
+                    </div>
+                 </div><!--#search-box-->
+              </div><!--#searchbar-->
+              <div id="states-2" >
+
+              </div>
+            </li>
+
+            <li>
+                <div class="form-group" id="radio_group">
+                 <div >
+                   <div class="input-group">
+                     <div id="radioBtn" class="btn-group">
+                       <a class="btn btn-primary btn-sm active" data-toggle="fun" data-title="Person" >Person</a>
+                       <a class="btn btn-primary btn-sm notActive" data-toggle="fun" data-title="Tag">Tag</a>
+                       <a class="btn btn-primary btn-sm notActive" data-toggle="fun" data-title="Post">Post</a>
+                     </div>
+                     <input type="hidden" name="fun" id="fun">
+                   </div>
+                 </div>
+               </div>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" style="font-size:19px;" aria-expanded="false"><i class="fas fa-cog"></i> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="nav-item" >
+                    <%= link_to  'Edit', edit_user_registration_path, method: :get  %>
+                </li>
+
+                <li class="nav-item">
+                    <%= link_to 'Delete', registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete %>
+                </li>
+
+                <li class="nav-item" >
+                  <%= link_to 'Logout', destroy_user_session_path, method: :delete ,class:"nav-link"  %>
+                </li>
+
+              </ul>
+            </li>
+            <% else %>
+              <li class="nav-item " id="login_li">
+                <%= link_to 'Login', new_user_session_path ,class:"nav-link"   %>
+
+              </li>
+
+          <% end %>
+          </ul>
+        </div><!-- /.navbar-collapse -->
 
 
-        <%= render 'home/search_bar' %>
-
-      <% end %>
-
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-        </li>
-      <% else %>
-
-
-        <li>
-          <%= link_to('Login', new_user_session_path)  %>
-        </li>
-      <% end %>
-
-    </ul>
-  </div>
+  </div><!-- /.container-fluid -->
 </nav>

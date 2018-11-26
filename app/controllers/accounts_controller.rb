@@ -1,7 +1,9 @@
 class AccountsController < ApplicationController
   def show
+
     @user = User.find_by(id:params[:id])
-    @microposts = Micropost.where("user_id= ?", @user.id).paginate(page: params[:page]) if current_user
+
+    current_user != @user ? @microposts =Micropost.where("user_id= ? and access=?", @user.id,"Public").paginate(page: params[:page]): @microposts = Micropost.where("user_id= ?", @user.id).paginate(page: params[:page])
   end
 
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_17_113901) do
+ActiveRecord::Schema.define(version: 2018_11_23_070140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,12 +38,23 @@ ActiveRecord::Schema.define(version: 2018_11_17_113901) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "micropost_tags", force: :cascade do |t|
+    t.bigint "micropost_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["micropost_id"], name: "index_micropost_tags_on_micropost_id"
+    t.index ["tag_id"], name: "index_micropost_tags_on_tag_id"
+  end
+
   create_table "microposts", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "picture"
+    t.string "title"
+    t.string "access"
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end
@@ -56,6 +67,12 @@ ActiveRecord::Schema.define(version: 2018_11_17_113901) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -76,5 +93,7 @@ ActiveRecord::Schema.define(version: 2018_11_17_113901) do
   add_foreign_key "comments", "microposts"
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "users"
+  add_foreign_key "micropost_tags", "microposts"
+  add_foreign_key "micropost_tags", "tags"
   add_foreign_key "microposts", "users"
 end

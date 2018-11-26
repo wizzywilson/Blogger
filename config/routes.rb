@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'users/sessions' }
   root "home#index"
   resources :relationships, only: [:create, :destroy]
-
+  resources :tags, only: [:show]
   resources :accounts do
     member do
       get :following, :followers

@@ -1,4 +1,29 @@
-<%= @results %>
-<% @results.each do |result| %>
-  <option> <%=  gravatar_for(resut) link_to result.first_name, account_path(result) %> </option>
-<% end %>
+<% if @option == 'Person' %>
+
+  <% @results.each do |result| %>
+
+    <li class="select2-results__option select2-results__option--highlighted" id="select2-state-ej-result-vt3t-AL" role="treeitem" aria-selected="false" data-select2-id="select2-state-ej-result-vt3t-AL">
+      <%=  gravatar_for(result,20) %>
+      <%= link_to result.first_name, account_path(result), method: :get %>
+    </li>
+  <% end %>
+
+<% elsif @option == 'Post' %>
+  <% @results.each do |result| %>
+
+    <li class="select2-results__option select2-results__option--highlighted" id="select2-state-ej-result-vt3t-AL" role="treeitem" aria-selected="false" data-select2-id="select2-state-ej-result-vt3t-AL">
+
+      <%= link_to result.title, micropost_path(result), method: :get %>
+    </li>
+  <% end %>
+
+  <% elsif @option == 'Tag' %>
+    <% @results.each do |result| %>
+
+      <li class="select2-results__option select2-results__option--highlighted" id="select2-state-ej-result-vt3t-AL" role="treeitem" aria-selected="false" data-select2-id="select2-state-ej-result-vt3t-AL">
+
+        <%= link_to result.name,tag_path(result) ,method: :get %>
+      </li>
+    <% end %>
+
+  <% end %>

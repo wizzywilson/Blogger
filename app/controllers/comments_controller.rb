@@ -9,12 +9,12 @@ class CommentsController < ApplicationController
     else
       @comment = Micropost.find_by(id:params[:id]).comments.build(content:params[:content], user_id: current_user.id)
       @comment.save
-      redirect_to request.env["HTTP_REFERER"]
-
+      redirect_to request.referer
     end
   end
 
   def update
+  
     if params[:type] == 'delete'
       @comment=Comment.find_by(id:params[:id])
       @comment.deleted = true
@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
   end
 
   def autocomplete
-    
+
   end
 
 end

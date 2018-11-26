@@ -1,11 +1,30 @@
 <%=  form_for @micropost do |f| %>
-  <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new micropost...", class:'share_post' %>
+  <div id="title" class="post_members">
+    <%= f.text_field :title, placeholder: "Title for new micropost...", class:'form-control',id:'title_tag'  %>
   </div>
-   <span> <%= f.submit "Share", class: "btn btn-primary btn-md share_button" %></span>
-  <span class="picture" id="uplaoder">
-    <%= f.file_field :picture ,  accept: 'image/jpeg,image/gif,image/png' %>
+  <div id="content" class="post_members">
+    <%= f.text_area :content, placeholder: "Write something here...", class:' form-control' ,id:'share_post',style:'margin-bottom:15px;'%>
+  </div>
+
+
+<!-- <input type="text" id="tag" name="tag" value="" class="title_tag" placeholder= "Compose new tag for micropost..." style="margin-bottom:15px;"> -->
+<div id="content " class="post_members" style="margin-bottom:15px;" >
+  <span>
+  <%= f.select(:tags, [], {}, { class:" form-control", multiple:"multiple" ,id:"tags",style:"width:100%;" }) %>
   </span>
+</div>
+
+
+   <span> <%= f.submit "Share", class: "btn btn-primary btn-md share_button",style: "display:none;", id:"share" %></span>
+
+  <span class="picture" id="uplaoder">
+    <%= f.file_field :picture ,  accept: 'image/jpeg,image/gif,image/png' ,class:"form-control-file" %>
+  </span>
+
+  <span>
+<%= f.select(:access, ['Public','Private'], {}, { class:"custom-select form-control",id:"inlineFormCustomSelect" }) %>
+  </span>
+
 <% end %>
 
 <script type="text/javascript">
@@ -15,4 +34,11 @@
       alert('Maximum file size is 5MB. Please choose a smaller file.');
     }
   });
+
+
+    //select-2
+    $("#tags").select2({
+        tags: true,
+        tokenSeparators: [',', ' ']
+    })
 </script>

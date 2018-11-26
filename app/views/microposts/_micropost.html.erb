@@ -1,5 +1,5 @@
 
-
+<h1><%= @tag.name if @tag != nil %></h1>
 
 
 
@@ -12,22 +12,23 @@
           <%= gravatar_for(micropost.user,50) %>
         </div>
         <div class="col-sm-10" >
-              <div class="user"> <strong><%= link_to micropost.user.first_name.upcase, account_path(micropost.user) %></strong> </div>
+              <div class="user"> <strong><%= link_to micropost.user.first_name.upcase, account_path(micropost.user), method: :get %></strong> </div>
+              <div class="title"> <strong><%= micropost.title %></strong> </div>
               <div class="content"><%= micropost.content %></div>
               <div class="">
                 <%= image_tag micropost.picture.url, :size => "200x200" if micropost.picture? %>
               </div>
               <div class="timestamp">
                 <span>Posted <%= time_ago_in_words(micropost.created_at) %> ago.</span>
-                <% if current_user.admin? || @user.id == micropost.user_id %>
-                    <span><%= link_to 'Destroy',  micropost,  method: :delete, data: { confirm: 'Are you sure?' } %></span>
+                <% if current_user.admin? || current_user.id == micropost.user_id %>
+                    <span><%= link_to 'Destroy',  micropost_path(micropost),  method: :delete, data: { confirm: 'Are you sure?' } %></span>
 
                 <% end %>
 
               </div>
               <div class="suggestion_box row">
                 <span class="col-sm-4"><%= micropost.likes.count %><%= link_to "Like",likes_path(micropost,type:'micropost'),method: :post %></span>
-                <span class="col-sm-4"> <%= link_to "Comment",class:"flip" %></span>
+                <span class="col-sm-4"> <%= link_to "Comment",class:"flip", method: :get %></span>
                 <span class="col-sm-4">Share</span>
               </div>
               <%= render 'comments/comment_box_form', box_for: micropost, type: '' %>
@@ -49,7 +50,7 @@
 
                       <div class="suggestion_box row">
                         <span class="col-sm-4"><%= comment.likes.count %><%= link_to "Like",likes_path(comment,type:'comment'),method: :post %></span>
-                        <span class="col-sm-4"> <%= link_to "Comment",class:"flip" %></span>
+                        <span class="col-sm-4"> <%= link_to "Comment",class:"flip", method: :get %></span>
                         <span class="col-sm-4">Share</span>
                       </div>
                           <%= render 'layouts/nested_comments', comment: comment %>
@@ -64,4 +65,3 @@
 </div>
 
 </div>
-<%= will_paginate @microposts %>

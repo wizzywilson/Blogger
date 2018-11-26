@@ -1,5 +1,6 @@
-@import "bootstrap-sprockets";
+
 @import "bootstrap";
+
 /*
 *= require select2
 *= require select2-bootstrap
@@ -73,11 +74,17 @@ footer ul li {
   padding-right: 0px;
 }
 
-.share_post{
-  margin-top: 60px;
+#share_post{
   height: 95px;
   width: 100%;
-  margin: 10px;
+  margin-top: 15px;
+  margin-bottom: 7px;
+}
+
+.title_tag{
+
+  width: 100%;
+
 }
 
 .second_half_page{
@@ -90,6 +97,11 @@ footer ul li {
 .share_button{
   width: 96px;
   margin-left: 10px;
+
+}
+
+.modal-lg{
+  width:600px;
 }
 
 .micropost{
@@ -119,6 +131,7 @@ footer ul li {
 
 .picture > input{
   display: inline;
+
 }
 
 .stats_box{
@@ -139,4 +152,166 @@ footer ul li {
 
 #nested_comments {
   list-style-type: none;
+}
+
+#states-2{
+  background-color: white
+}
+
+#inlineFormCustomSelect{
+  width: 150px;
+  float: right;
+}
+
+
+
+
+
+
+//bootstrap extra
+
+
+
+
+#image{
+  padding: 0;
+}
+
+#radioBtn .notActive{
+    color: #3276b1;
+    background-color: #fff;
+}
+
+#radio_group{
+
+    margin-bottom: 0px;
+    margin-top: 10px;
+
+}
+
+#radioBtn a{
+  padding: 4px;
+}
+
+@media screen and (max-width: 600px) {
+  .icon_names{
+    display: none;
+  }
+  #radio_group{
+  display: none;
+
+  }
+}
+
+// sliding search bar
+#searchbar
+{
+  position: relative;
+}
+
+#searchbar #sliding-panel-outer
+{
+  display: inline-block;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0px;
+  width: 200px;
+  transition: width 0.4s ease;
+}
+
+#searchbar #sliding-panel-inner
+{
+  width: 200px;
+}
+
+#searchbar .search-label
+{
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  line-height: 30px;
+}
+
+#searchbar .search-label .fa-times,
+#searchbar.collapsed .search-label .fa-search
+{
+  display: inline-block;
+}
+#searchbar .search-label .fa-search,
+#searchbar.collapsed .search-label .fa-times
+{
+  display: none;
+}
+
+#searchbar.collapsed #sliding-panel-outer
+{
+  width: 0px;
+}
+
+
+#states-2{
+position: absolute;
+
+top: 46px;
+width: 198px;
+right: 1px;
+overflow: visible;
+z-index: 100;
+display: none;
+}
+
+.dd-select{
+  display: hidden;
+}
+
+.nav-item{
+  font-size: 19px;
+}
+
+.fa{
+  color: blue;
+}
+
+.search-label{
+  font-size: 19px;
+  margin-top: 5px;
+}
+
+#colour{
+  color: white;
+}
+
+.navbar-brand{
+  position: absolute;
+  right: 50%;
+
+      height: 40px;
+      margin-top: 5px;
+
+}
+
+#search_li{
+
+    margin-top: 7px;
+    margin-right: 15px;
+
+}
+
+#login_li{
+  position: absolute;
+  right: 8px;
+}
+
+.jumbo{
+  margin-top: 150px;
+margin-bottom: 100px;
+}
+
+#tags{
+  width: 100%;
+  margin-bottom: 15px;
 }
