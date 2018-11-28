@@ -11,5 +11,6 @@ class LikesController < ApplicationController
 
   def destroy
     Like.destroy(params[:id])
+    redirect_to request.env["HTTP_REFERER"]
   end
 end

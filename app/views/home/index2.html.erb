@@ -1,16 +1,18 @@
 <% if current_user %>
-<section class="flex_container">
-  <div class="left-half">
+
+<div class="container-fluid">
+  <div class="row">
     <%= render 'layouts/left_side' %>
-  </div>
-  <div class="center-half">
-    <%= render 'microposts/micropost' %>
-  </div>
-  <div class="right-half">
+      <div class="col-sm-9 second_half_page ">
+        <h1>Micropost Feeds</h1>
+        <%= render 'microposts/micropost' %>
 
+      </div>
   </div>
+</div>
 
-</section>
+
+
 <% else %>
   <div class="container jumbo">
     <div class="jumbotron centralize">
@@ -20,5 +22,8 @@
         <a class="btn btn-primary btn-lg" href="/users/sign_up" role="button">  Sign up  </a>
       </p>
     </div>
+
   </div>
+
+
 <% end %>

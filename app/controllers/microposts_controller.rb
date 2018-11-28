@@ -30,20 +30,58 @@ class MicropostsController < ApplicationController
   end
 
   def show
-    @microposts = [Micropost.find_by(id:params[:id])]
-      render 'microposts/_micropost'
+    @microposts = Micropost.paginate(page: params[:page]).where("id = ?", params[:id])
+
+
+      render 'home/_view_post_tags'
   end
 
   def destroy
     Micropost.destroy(params[:id])
     redirect_to request.env["HTTP_REFERER"]
+  end
+
+  def edit
+    @micropost = Micropost.find_by(id:params[:id])
+    @tags = @micropost.tags
 
   end
 
+  def update
+    @micropost = Micropost.find_by(id:params[:id])
+    @micropost.update(micropost_update_params)
+
+    @micropost.micropost_tags.destroy_all
+
+    tags = params[:micropost][:tags]
+    tags.delete('')
+
+
+
+    tags.each do |tag|
+      @tag = Tag.find_by(name: tag)
+
+      @tag = Tag.create(name: tag) if @tag == nil
+
+      @micropost.micropost_tags.build(tag_id: @tag.id).save
+    end
+
+
+
+    @micropost = Micropost.new
+    redirect_to request.env["HTTP_REFERER"]
+
+
+  end
 
   private
 
     def micropost_params
       params.require(:micropost).permit(:content, :picture, :title,:access)
     end
+
+    def micropost_update_params
+      params.require(:micropost).permit(:content, :picture, :title,:access,:tags)
+    end
+
 end

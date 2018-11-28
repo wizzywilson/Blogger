@@ -1,0 +1,15 @@
+
+$('.modal-body').html("<%= j render(:partial => 'microposts/micropost_form') %>");
+$('#Modal').click();
+var data = {
+    id: 1,
+    text: 'Barn owl'
+};
+
+<% @tags.each do |tag,index| %>
+data = { id: 1, text: "<%= tag.name %>" };
+var newOption = new Option(data.text, data.id, false, false);
+$('.tags').append(newOption).trigger('change');
+
+
+<% end %>

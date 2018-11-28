@@ -1,5 +1,8 @@
 
 @import "bootstrap";
+@import "index";
+@import "microposts";
+@import "left_side";
 
 /*
 *= require select2
@@ -33,7 +36,6 @@
 .footer {
   position: relative;
   bottom:0px;
-  margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid #eaeaea;
   color: #777;
@@ -61,18 +63,10 @@ footer ul li {
   margin-right: 15px;
 }
 
-.profile_name{
-  font-size:20px;
-}
-.profile_pic{
-  padding-left: 0px;
-  padding-right: 0px;
-}
 
-.profile_atrributes{
 
-  padding-right: 0px;
-}
+
+
 
 #share_post{
   height: 95px;
@@ -81,11 +75,7 @@ footer ul li {
   margin-bottom: 7px;
 }
 
-.title_tag{
 
-  width: 100%;
-
-}
 
 .second_half_page{
   float: right;
@@ -104,20 +94,7 @@ footer ul li {
   width:600px;
 }
 
-.micropost{
-  margin-top: 20px;
-}
 
-.micropost > li{
-  margin-bottom: 20px;
-  list-style-type: none;
-  background-color: #C5E3ED;
-  padding-top: 15px;
-  padding-bottom: 7px;
-  padding-left: 10px;
-  border-radius: 7px;
-
-}
 
 
 
@@ -126,12 +103,19 @@ footer ul li {
 }
 
 #uplaoder{
-  display: inline;
+
+
 }
 
 .picture > input{
-  display: inline;
 
+
+}
+
+#sel{
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
 }
 
 .stats_box{
@@ -163,8 +147,14 @@ footer ul li {
   float: right;
 }
 
+.comment_edit{
+  display: none;
+}
 
+.replies_box{
+  display: none;
 
+}
 
 
 
@@ -199,7 +189,6 @@ footer ul li {
   }
   #radio_group{
   display: none;
-
   }
 }
 
@@ -314,4 +303,48 @@ margin-bottom: 100px;
 #tags{
   width: 100%;
   margin-bottom: 15px;
+}
+
+.micropost_group{
+  padding-left: 0px;
+}
+
+.content{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.comment_groups{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.suggestions{
+  justify-content: flex-start;
+  margin-right: 20px;
+}
+
+
+
+.heart{
+  color:#ff3300;
+}
+
+
+// disable navbar 3
+
+.navbar-collapse.collapse {
+  display: block!important;
+}
+
+.navbar-nav>li, .navbar-nav {
+  float: left !important;
+}
+
+.navbar-nav.navbar-right:last-child {
+  margin-right: -15px !important;
+}
+
+.navbar-right {
+  float: right!important;
 }

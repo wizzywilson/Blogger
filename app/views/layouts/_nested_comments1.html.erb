@@ -1,0 +1,27 @@
+<% if comment.replies.length!=0 %>
+  <% comment.replies.each do |reply| %>
+    <ol>
+
+<% if reply.deleted %>
+<li id="nested_comments"> <strong>UNANIMOUS</strong> <span><%=reply.content%> </span> <span>Posted <%= time_ago_in_words(reply.created_at) %> ago.</span>  </li>
+<% else %>
+      <li id="nested_comments"> <strong><%= link_to reply.user.first_name.upcase %></strong> <span><%=reply.content%> </span> <span>Posted <%= time_ago_in_words(reply.created_at) %> ago.</span> <%= link_to 'edit',comment_path(reply,type: 'edit'), method: :patch %> <%= link_to 'destroy',comment_path(reply,type:'delete'),method: :patch %> <%= link_to 'reply' %> </li>
+<% end %>
+      <%= render 'comments/comment_box_form', box_for: reply,type: 'replies' %>
+      <%= render 'comments/comment_edit', box_for: reply,type: 'replies' %>
+
+      <div class="suggestion_box row">
+        <% if reply.likes.where(user:current_user).count == 0 %>
+          <span class="col-sm-4"><%= reply.likes.count %><%= link_to "Like",likes_path(reply,type:'comment'),method: :post %></span>
+        <% else %>
+        <span class="col-sm-4"><%= reply.likes.count %><%= link_to "Unlike",like_path(reply.likes.where(user:current_user).first,type:'comment'),method: :delete %></span>
+        <% end %>
+        <span class="col-sm-4"> <%= link_to "Comment",class:"flip" %></span>
+        <span class="col-sm-4">Share</span>
+      </div>
+        <%= render 'layouts/nested_comments',comment: reply%>
+
+      <% else %>
+    </ol>
+      <% end %>
+  <% end %>
