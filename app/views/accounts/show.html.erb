@@ -1,13 +1,16 @@
 
 <% if current_user %>
 
-<div class="container-fluid">
-  <div class="row">
+<section class="flex_container">
+  <div class="left-half">
     <%= render 'layouts/left_side' %>
-      <div class="col-sm-9 second_half_page ">
-        <h1>Micropost Feeds</h1>
-        <%= render 'microposts/micropost' %>
-      </div>
   </div>
-</div>
+  <div class="center-half">
+    <%= render 'microposts/micropost' %>
+  </div>
+  <div class="right-half">
+
+  </div>
+
+</section>
 <% end %>

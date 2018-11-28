@@ -1,0 +1,48 @@
+/* Pen-specific styles */
+html, body, section {
+  width:100%;
+}
+
+html, section{
+height: 100%;
+}
+
+
+
+.halfs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+/* Flex data  */
+.flex_container {
+  display: flex;
+}
+
+.left-half {
+  background-color: white;
+  flex: 3;
+  padding: 1rem;
+  padding-top: 40px;
+}
+
+.center-half {
+
+  background-color: #C5E3ED;
+  flex: 5.5;
+  padding: 1rem;
+min-height: 91vh;
+}
+
+.jumbotron{
+  background-color: #C5E3ED;
+
+}
+
+.right-half {
+  background-color:white;
+  flex: 3.5;
+  padding: 1rem;
+}

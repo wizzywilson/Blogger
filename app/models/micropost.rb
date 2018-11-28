@@ -1,17 +1,17 @@
 class Micropost < ApplicationRecord
   belongs_to :user
-has_many :micropost_tags,dependent: :destroy
-has_many :tags, through: :micropost_tags
+  has_many :micropost_tags,dependent: :destroy
+  has_many :tags, through: :micropost_tags
 
   has_many :comments, dependent: :destroy
   has_many :likes, as: :likeable,dependent: :destroy
   validates :user_id, presence: true
-  validates :content, presence: true, length: { maximum: 140 }
-  self.per_page = 3
+  validates :content, presence: true, length: { maximum: 500 }
+  self.per_page = 4
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
   validate  :picture_size
-
+accepts_nested_attributes_for :micropost_tags
   private
 
    # Validates the size of an uploaded picture.

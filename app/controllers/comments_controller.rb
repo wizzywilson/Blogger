@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
   end
 
   def update
-  
+
     if params[:type] == 'delete'
       @comment=Comment.find_by(id:params[:id])
       @comment.deleted = true

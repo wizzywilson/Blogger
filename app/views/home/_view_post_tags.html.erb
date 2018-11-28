@@ -1,0 +1,16 @@
+<section class="flex_container">
+  <div class="left-half" style="text-align:center;">
+    <% if @tag!= nil %>
+      <h3> <strong>Posts with #<%= @tag.name %></strong> </h3>
+     <% else %>
+      <h3> <strong>Micropost with title <%= @microposts.first.title %></strong> </h3>
+     <% end %>
+  </div>
+  <div class="center-half">
+    <%= render 'microposts/micropost' %>
+  </div>
+  <div class="right-half">
+
+  </div>
+
+</section>

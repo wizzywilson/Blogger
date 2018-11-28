@@ -2,7 +2,8 @@
 
 
 
-  <button type="button" class="btn btn-primary btn-block followbtn" data-toggle="modal" data-target="#myModal"> <strong>Share post</strong> </button>
+  <button id="Modal" type="button" class="btn btn-primary btn-block followbtn" data-toggle="modal" data-target="#myModal"> <strong>Share post</strong> </button>
+  
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -12,7 +13,7 @@
           <h4 class="modal-title">Compose new micropost...</h4>
         </div>
         <div class="modal-body">
-          <%= render 'microposts/micropost_form' %>
+          <%= render 'microposts/micropost_form'%>
 
         </div>
         <div class="modal-footer">

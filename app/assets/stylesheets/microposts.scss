@@ -1,3 +1,55 @@
 // Place all the styles related to the Microposts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.micropost{
+  margin-top: 20px
+}
+
+.micropost > li{
+  margin-bottom: 20px;
+  list-style-type: none;
+  background-color: white;
+  padding-top: 8px;
+  padding-bottom: 7px;
+  padding-left: 10px;
+  border-radius: 7px;
+
+}
+
+
+
+.left-half-micropost{
+  flex: 1;
+}
+
+.right-half-micropost{
+  flex: 10;
+  justify-content: flex-start;
+}
+
+.image{
+  border-radius: 5px;
+  text-align: center;
+}
+
+.comment_input{
+  border-radius: 10px;
+  width: 100%;
+  height: 27px;
+  margin-bottom: 10px;
+}
+
+#comment_edit_input{
+  border-radius: 10px;
+
+}
+
+#comment_edit_submit{
+  display: none !important;
+}
+
+.comment_form{
+  background-color: inherit;
+  width:95%;
+}

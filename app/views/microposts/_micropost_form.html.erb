@@ -1,4 +1,4 @@
-<%=  form_for @micropost do |f| %>
+<%=  form_for @micropost  do |f|%>
   <div id="title" class="post_members">
     <%= f.text_field :title, placeholder: "Title for new micropost...", class:'form-control',id:'title_tag'  %>
   </div>
@@ -10,18 +10,18 @@
 <!-- <input type="text" id="tag" name="tag" value="" class="title_tag" placeholder= "Compose new tag for micropost..." style="margin-bottom:15px;"> -->
 <div id="content " class="post_members" style="margin-bottom:15px;" >
   <span>
-  <%= f.select(:tags, [], {}, { class:" form-control", multiple:"multiple" ,id:"tags",style:"width:100%;" }) %>
+  <%= f.select(:tags, [], {}, { class:" form-control tags", multiple:"multiple" ,style:"width:100%;" }) %>
   </span>
 </div>
 
 
-   <span> <%= f.submit "Share", class: "btn btn-primary btn-md share_button",style: "display:none;", id:"share" %></span>
 
   <span class="picture" id="uplaoder">
     <%= f.file_field :picture ,  accept: 'image/jpeg,image/gif,image/png' ,class:"form-control-file" %>
   </span>
+  <span style="display:none;" > <%= f.submit "Share", class: "btn btn-primary btn-md share_button", id:"share" %></span>
 
-  <span>
+  <span id="sel">
 <%= f.select(:access, ['Public','Private'], {}, { class:"custom-select form-control",id:"inlineFormCustomSelect" }) %>
   </span>
 
@@ -37,7 +37,7 @@
 
 
     //select-2
-    $("#tags").select2({
+    $(".tags").select2({
         tags: true,
         tokenSeparators: [',', ' ']
     })

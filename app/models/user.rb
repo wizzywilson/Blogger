@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :first_name, presence: true
   validates :last_name, presence: true
-  self.per_page = 3
+  self.per_page = 5
   has_many :microposts, dependent: :destroy
   default_scope -> { order(created_at: :desc) }
 
