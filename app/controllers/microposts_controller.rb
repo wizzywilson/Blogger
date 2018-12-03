@@ -33,12 +33,16 @@ class MicropostsController < ApplicationController
     @microposts = Micropost.paginate(page: params[:page]).where("id = ?", params[:id])
 
 
-      render 'home/_view_post_tags'
+    respond_to do |format|
+      format.js { render 'home/index.js.erb' }
+    end
+
   end
 
   def destroy
+    @id = params[:id]
     Micropost.destroy(params[:id])
-    redirect_to request.env["HTTP_REFERER"]
+
   end
 
   def edit

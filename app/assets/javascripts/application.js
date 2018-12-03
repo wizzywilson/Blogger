@@ -35,6 +35,99 @@ search_bar_ajax_call();
 
       });
 
+//last day filter
+
+$("#button2").click(function(e) {
+  if(document.getElementById('button5').classList.contains("filter_select")){
+    var main = "Personal_Feeds"
+  }
+  else{
+    var main = "All_Feeds"
+  }
+    e.preventDefault();
+    $.ajax({
+        type: "GET",
+        url: "/home/index",
+        data: {
+            main: main,
+            filter: "last_day"
+        },
+        success: function(result) {
+
+        },
+        error: function(result) {
+            alert('error');
+        }
+    });
+});
+
+// last week
+
+$("#button1").click(function(e) {
+  $('#button5').toggleClass("filter_select");
+  $('#button1').toggleClass("filter_select");
+
+    e.preventDefault();
+    $.ajax({
+        type: "GET",
+        url: "/home/index",
+        data: {
+            main: "All_Feeds"
+        },
+        success: function(result) {
+
+        },
+        error: function(result) {
+            alert('error');
+        }
+    });
+});
+
+$("#button5").click(function(e) {
+  $('#button5').toggleClass("filter_select");
+  $('#button1').toggleClass("filter_select");
+
+    e.preventDefault();
+    $.ajax({
+        type: "GET",
+        url: "/home/index",
+        data: {
+            main: "Personal_Feeds"
+        },
+        success: function(result) {
+
+        },
+        error: function(result) {
+            alert('error');
+        }
+    });
+});
+
+$("#button3").click(function(e) {
+  if(document.getElementById('button5').classList.contains("filter_select")){
+    var main = "Personal_Feeds"
+  }
+  else{
+    var main = "All_Feeds"
+  }
+    e.preventDefault();
+    $.ajax({
+        type: "GET",
+        url: "/home/index",
+        data: {
+          main: main,
+            filter: "Last_Week"
+        },
+        success: function(result) {
+
+        },
+        error: function(result) {
+            alert('error');
+        }
+    });
+});
+
+
 // radio button code
 
 
@@ -65,6 +158,14 @@ $("#searchbar .search-label").on("click", function(e){
 
 });
 
+});
+
+//Pagenation
+$(function(){
+    $(".pagination a").on("click", function() {
+        $.get(this.href, null, null, "script");
+        return false;
+    });
 });
 
 //Sharing post

@@ -1,6 +1,6 @@
 <div class="comment_form" >
   <%= form_for Comment.new, url:comments_path(box_for,type: type),remote:true do |f| %>
-  <%= text_field_tag 'content',params[:content], class:"form-control comment_input" %>
+  <%= text_field_tag 'content'," ", class:"form-control comment_input" %>
   <%= f.submit "Submit",  style:"display:none;", id:"comment_submit" %>
   <% end %>
 </div>

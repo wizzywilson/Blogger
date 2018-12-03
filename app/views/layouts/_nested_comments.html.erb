@@ -13,11 +13,10 @@
    <div class="flex_container">
 
 
-       <% if reply.likes.where(user:current_user).count == 0 %>
-         <span  class="suggestions"><%= link_to likes_path(reply,type:'comment'),method: :post do %> <i class="far fa-heart"></i> <% end  %> <span><%= reply.likes.count %></span> </span>
-       <% else %>
-       <span class="suggestions"><%= link_to like_path(reply.likes.where(user:current_user).first,type:'comment'),method: :delete do %><i class="fas fa-heart heart"></i> <% end %> <span><%= reply.likes.count %></span></span>
-       <% end %>
+
+       <span id="comment_like_<%= reply.id %>" >
+         <%= render 'likes/likes_reply',reply:reply %>
+       </span>
 
      <span class="suggestions" >
          <a onclick="display_comment_form(this)" id="<%= reply.id %>" ><i class="far fa-comment"></i> <%= reply.replies.count %> </a>
@@ -25,12 +24,13 @@
      <% if !reply.deleted %>
            <% if current_user.admin? || current_user.id == reply.user_id %>
                <span class="suggestions">
-                 <%= link_to comment_path(reply,type:'delete'),method: :patch,data: { confirm: 'Are you sure?' } do %>
+                 <%= link_to comment_path(reply,type:'delete'),method: :patch,data: { confirm: 'Are you sure?' },remote: true do %>
                         <i class="far fa-trash-alt"></i>
                  <% end %>
                </span>
            <% end %>
            <span  class="suggestions">
+
                <a onclick="display_edit_form(this)" id="<%= reply.id %>" ><i class="far fa-edit"></i> </a>
            </span>
 
@@ -64,18 +64,20 @@ function display_comment_form(element,event)
   $(".edit_"+element.id).hide();
 
 $(".comment_"+element.id).slideToggle();
+$(".comment_"+element.id,input)[1].value="";
+
 event.preventDefault();
 }
 
 function display_edit_form(element,event)
 {
-  event.preventDefault();
+
 
   console.log("comment_"+element.id);
   $(".comment_"+element.id).hide();
 
 $(".edit_"+element.id).show();
-
+  event.preventDefault();
 }
 
 </script>

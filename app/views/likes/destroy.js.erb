@@ -1,0 +1,10 @@
+
+
+
+<% if @type == 'Micropost' %>
+$('#like_<%= @micropost.id %>').html("<%= escape_javascript render(:partial => 'likes/likes', :locals => { :micropost => @micropost }) %>");
+<% elsif @type == 'Comment' %>
+$('#comment_like_<%= @comment.id %>').html("<%= escape_javascript render(:partial => 'likes/likes_reply', :locals => { :reply => @comment }) %>");
+
+
+<% end %>

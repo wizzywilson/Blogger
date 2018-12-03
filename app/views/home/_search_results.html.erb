@@ -4,7 +4,7 @@
 
     <li class="select2-results__option select2-results__option--highlighted" id="select2-state-ej-result-vt3t-AL" role="treeitem" aria-selected="false" data-select2-id="select2-state-ej-result-vt3t-AL">
       <%=  gravatar_for(result,20) %>
-      <%= link_to result.first_name, account_path(result), method: :get %>
+      <%= link_to result.first_name, account_path(result), method: :get,remote:true %>
     </li>
   <% end %>
 
@@ -13,7 +13,7 @@
 
     <li class="select2-results__option select2-results__option--highlighted" id="select2-state-ej-result-vt3t-AL" role="treeitem" aria-selected="false" data-select2-id="select2-state-ej-result-vt3t-AL">
 
-      <%= link_to result.title, micropost_path(result), method: :get %>
+      <%= link_to result.title, micropost_path(result), method: :get,remote:true %>
     </li>
   <% end %>
 
@@ -22,7 +22,7 @@
 
       <li class="select2-results__option select2-results__option--highlighted" id="select2-state-ej-result-vt3t-AL" role="treeitem" aria-selected="false" data-select2-id="select2-state-ej-result-vt3t-AL">
 
-        <%= link_to result.name,tag_path(result) ,method: :get %>
+        <%= link_to result.name,tag_path(result) ,remote: true,method: :get %>
       </li>
     <% end %>
 

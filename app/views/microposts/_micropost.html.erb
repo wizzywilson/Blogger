@@ -1,8 +1,8 @@
-
+<div class="index_post">
 <div class="container-fluid">
   <div class="micropost ">
     <% @microposts.each do |micropost| %>
-    <li  >
+    <li id="post_<%= micropost.id %>" >
       <div class="flex_container">
           <div class="left-half-micropost">
               <%= gravatar_for(micropost.user,40) %>
@@ -46,22 +46,17 @@
              <%= image_tag micropost.picture.url, class:"image" if micropost.picture? %>
          </div>
 
+<span id="like_<%= micropost.id %>" >
+  <%= render 'likes/likes',micropost:micropost %>
+</span>
 
-
-               <% if micropost.likes.where(user:current_user).count == 0 %>
-
-
-                 <span class="suggestions" ><%= link_to likes_path(micropost,type:'micropost'),method: :post, onclick:"like(this)",:remote => true, id: micropost.id  do%> <i class="far fa-heart"></i> <% end  %> <span><%= micropost.likes.count %></span> </span>
-               <% else %>
-               <span class="suggestions"><%= link_to like_path(micropost.likes.where(user:current_user).first,type:'micropost'),method: :delete do %><i class="fas fa-heart heart"></i> <% end %> <span><%= micropost.likes.count %></span> </span>
-               <% end %>
                    <span class="suggestions" >
                        <a onclick="display_micropost_form(this)" id="<%= micropost.id %>" ><i class="far fa-comment"></i> <%= micropost.comments.where("parent_id IS ?", nil ).count %> </a>
 
                    </span>
                      <% if current_user.admin? || current_user.id == micropost.user_id %>
                          <span class="suggestions">
-                           <%= link_to micropost_path(micropost),  method: :delete, data: { confirm: 'Are you sure?' } do %>
+                           <%= link_to micropost_path(micropost),  method: :delete, data: { confirm: 'Are you sure?' }, remote: true do %>
                            <i class="far fa-trash-alt"></i>
                            <% end %>
                          </span>
@@ -74,55 +69,7 @@
 
                      <% end %>
 
-                     <div class="micropost-<%= micropost.id  %>" style="display:none">
-                         <%= render 'comments/comment_box_form', box_for: micropost, type: '' %>
-
-                         <% micropost.comments.where("parent_id IS ?", nil ).each do |comment| %>
-                           <ol class=" micropost_group" >
-                             <% if comment.deleted %>
-                                  <li id="nested_comments"> <strong>UNANIMOUS</strong> <span><%=comment.content%> </span> . <%= time_ago_in_words(comment.created_at) %>   </li>
-                             <% else %>
-                                  <li id="nested_comments">   <%= gravatar_for(comment.user,20) %> <strong><%= link_to comment.user.first_name.upcase %></strong> <span><%= comment.content %> </span> . <%= time_ago_in_words(comment.created_at) %>
-                             <% end %>
-
-                            <div class="flex_container">
-                              <% if comment.likes.where(user:current_user).count == 0 %>
-                                <span  class="suggestions"><%= link_to likes_path(comment,type:'comment'),method: :post do %> <i class="far fa-heart"></i> <% end  %> <span><%= comment.likes.count %></span> </span>
-                              <% else %>
-                              <span class="suggestions"><%= link_to like_path(comment.likes.where(user:current_user).first,type:'comment'),method: :delete do %><i class="fas fa-heart heart"></i> <% end %> <span><%= comment.likes.count %></span></span>
-                              <% end %>
-                              <span  class="suggestions">
-                                  <a onclick="display_comment_form(this)" id="<%= comment.id %>" ><i class="far fa-comment"></i> <%= comment.replies.count %> </a>
-                              </span>
-                              <% if !comment.deleted %>
-                                    <% if current_user.admin? || current_user.id == comment.user_id %>
-                                        <span class="suggestions">
-                                          <%= link_to comment_path(comment,type:'delete'),method: :patch,data: { confirm: 'Are you sure?' } do %>
-                                          <i class="far fa-trash-alt"></i>
-                                          <% end %>
-                                        </span>
-                                    <% end %>
-                                    <span  class="suggestions">
-                                        <a onclick="display_edit_form(this)" id="<%= comment.id %>" ><i class="far fa-edit"></i></a>
-                                    </span>
-
-                              <% end %>
-
-                            </div>
-
-                            <div class="comment_<%= comment.id %> comment_edit"  >
-                              <%= render 'comments/comment_box_form', box_for: comment,type: 'replies'  %>
-                              <%= render 'layouts/nested_comments', comment: comment %>
-                            </div>
-                            <div class="edit_<%= comment.id %> comment_edit"  >
-                                    <%= render 'comments/comment_edit', box_for: comment,type: 'replies'  %>
-                                    <%= render 'layouts/nested_comments', comment: comment %>
-                            </div>
-
-
-                           </ol>
-                          <% end %>
-                     </div>
+                    <%= render 'comments/micropost_comments',micropost:micropost%>
 
 
 
@@ -133,6 +80,8 @@
 
 </div>
 </div>
+</div>
+
 
 <script type="text/javascript">
 
@@ -158,16 +107,7 @@ event.preventDefault();
 
 }
 
-function like_click(element,event)
-{
-  console.log("comment_"+element.id);
-  $("#micropost-"+element.id).hide();
 
-$(".edit_"+element.id).show();
-event.preventDefault();
-
-
-}
 
 function display_micropost_form(element,event) {
   console.log("comment_"+element.id);
@@ -175,4 +115,12 @@ function display_micropost_form(element,event) {
 
 event.preventDefault();
 }
+
+
+   $(function(){
+     $('.pagination a').attr('data-remote', 'true')
+   });
+
+
+
 </script>
