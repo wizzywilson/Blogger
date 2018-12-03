@@ -46,3 +46,14 @@ min-height: 91vh;
   flex: 3.5;
   padding: 1rem;
 }
+
+.filter{
+  flex:auto;
+  background-color: #686b6d;
+  color: white;
+}
+
+
+.btn-group > .btn:hover, .btn-group > .btn:focus{
+  color: white;
+}

@@ -1,0 +1,21 @@
+
+
+<% if @type == 'micropost' %>
+
+  $('.<%= @type%>-<%= @id %>').html("<%=j render :partial => 'comments/micropost_comments',:micropost=> @micropost %>")
+
+  $('.<%= @type%>-<%= @id %>').show();
+$('.<%= @type%>-<%= @id %> input')[1].value=""
+$('#<%= @id %>').html("<i class='far fa-comment'></i> <%= @micropost.comments.where('parent_id IS ?', nil ).count %> ")
+
+ <% elsif @type == 'comment' %>
+
+ $('.<%= @type%>_<%= @parent.id %>').html("<%=j render :partial =>  'comments/comment_box_form', :locals => {:comment => @parent, :box_for => @parent,type: 'replies' } %>")
+
+$('.<%= @type%>_<%= @parent.id %>').append("<%=j render :partial =>  'layouts/nested_comments', :locals => {:comment => @parent } %>")
+
+$('.<%= @type%>_<%= @parent.id %>').show();
+$('.<%= @type%>_<%= @parent.id %> input')[1].value=""
+$('#<%= @id %>').html("<i class='far fa-comment'></i> <%= @parent.replies.count %> ")
+
+ <% end %>

@@ -1,5 +1,5 @@
 <div class="comment_form">
-  <%= form_for box_for, method: :patch do |f| %>
+  <%= form_for box_for, method: :patch , remote: true do |f| %>
   <%= text_field_tag 'content',box_for.content, id:"comment_edit_input",class:"form-control"%>
   <%= f.submit "Submit", class: "followbtn",  style:"display:none;" ,id:"comment_edit_submit" %>
   <% end %>

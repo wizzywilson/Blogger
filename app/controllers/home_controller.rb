@@ -3,10 +3,40 @@ class HomeController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
+
     if current_user
       @user = User.find_by(id: current_user.id)
       @micropost = current_user.microposts.build if current_user
-      @microposts = Micropost.where("(user_id IN (?) AND access=?) OR user_id= ? ", @user.following_ids,"Public",@user.id).paginate(page: params[:page]) if current_user
+
+      @microposts = Micropost.where(" access=? ", "Public").paginate(page: params[:page]) if current_user
+
+      if params[:main] == 'All_Feeds'
+        @microposts = Micropost.where(" access=? ", "Public").paginate(page: params[:page]) if current_user
+        remote = 1
+      end
+
+      if params[:main] == 'Personal_Feeds'
+        @microposts = Micropost.where("(user_id IN (?) AND access=?) OR user_id= ? ", @user.following_ids,"Public",@user.id).paginate(page: params[:page]) if current_user
+        remote = 1
+      end
+
+      if params[:filter] == 'last_day'
+          @microposts = @microposts.where(created_at: (Date.today).beginning_of_day..(Date.today-1).end_of_day)
+          remote = 1
+      end
+
+      if params[:filter] == 'Last_Week'
+        @microposts = @microposts.where(created_at: (Date.today-7).beginning_of_day..(Date.today).end_of_day)
+        remote = 1
+      end
+      if remote == 1
+
+        respond_to do |format|
+          format.js { render 'index.js.erb' }
+        end
+        
+      end
+
     end
   end
 

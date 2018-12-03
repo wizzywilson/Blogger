@@ -1,16 +1,33 @@
 class LikesController < ApplicationController
   def create
+
     if params[:type] == 'micropost'
-      Micropost.find_by(id:params[:id]).likes.build(user_id:current_user.id).save
+
+      @type = params[:type]
+      @micropost = Micropost.find_by(id:params[:id])
+      @micropost.likes.build(user_id:current_user.id).save
+      @id = params[:id]
   else
 
-      Comment.find_by(id:params[:id]).likes.build(user_id:current_user.id).save
+      @type = params[:type]
+      @comment = Comment.find_by(id:params[:id])
+      @comment.likes.build(user_id:current_user.id).save
   end
-    redirect_to request.env["HTTP_REFERER"]
+
   end
 
   def destroy
+    @like = Like.find_by(id:params[:id])
+    @type = @like.likeable_type
+    @id = @like.likeable_id
+
+    if(@type == 'Micropost')
+      @micropost = Micropost.find_by(id: @id)
+    elsif @type == 'Comment'
+      @comment = Comment.find_by(id: @id)
+    end
+
     Like.destroy(params[:id])
-    redirect_to request.env["HTTP_REFERER"]
   end
+
 end

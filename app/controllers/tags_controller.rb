@@ -3,7 +3,9 @@ class TagsController < ApplicationController
     @tag = Tag.find_by(id:params[:id])
     @microposts = @tag.microposts.paginate(page: params[:page])
 
-    render 'home/_view_post_tags'
+    respond_to do |format|
+      format.js { render 'home/index.js.erb' }
+    end
 
   end
 

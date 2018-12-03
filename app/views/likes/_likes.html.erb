@@ -1,0 +1,5 @@
+<% if micropost.likes.where(user:current_user).count == 0 %>
+  <span class="suggestions" ><%= link_to likes_path(micropost,type:'micropost'),method: :post,:remote => true do%> <i class="far fa-heart"></i> <span><%= micropost.likes.count %></span>  <% end  %> </span>
+<% else %>
+  <span class="suggestions"><%= link_to like_path(micropost.likes.where(user:current_user).first,type:'micropost'),method: :delete,:remote => true, id:"unlike_"+ micropost.id.to_s do %><i class="fas fa-heart heart"></i> <% end %> <span><%= micropost.likes.count %></span> </span>
+<% end %>

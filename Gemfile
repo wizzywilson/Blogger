@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "select2-rails"
 gem 'bootstrap-sass', '~> 3.3.7'
+gem 'groupdate'
 
 gem 'will_paginate',           '3.1.6'
 gem 'popper_js', '~> 1.14.5'

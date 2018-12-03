@@ -4,6 +4,26 @@
     <%= render 'layouts/left_side' %>
   </div>
   <div class="center-half">
+
+
+    <div class="btn-group flex_container" role="group" aria-label="Basic example" >
+      <button type="button" id="button1" class="btn btn-secondary filter filter_select">All Feeds</button>
+      <button type="button"  id="button5" class="btn btn-secondary filter">Personal Feed</button>
+      <div class = "btn-group">
+   <button type = "button" class = "btn btn-primary dropdown-toggle" data-toggle = "dropdown">
+      Filter
+      <span class = "caret"></span>
+   </button>
+
+   <ul class = "dropdown-menu" role = "menu">
+      <li id="button2" ><a href = "#">Last Day</a></li>
+      <li id="button3" ><a href = "#">Last Week</a></li>
+      <li id="button4" ><a href = "#">Last Year</a></li>
+   </ul>
+
+</div>
+    </div>
+
     <%= render 'microposts/micropost' %>
   </div>
   <div class="right-half">

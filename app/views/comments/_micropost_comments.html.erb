@@ -1,0 +1,54 @@
+<% micropost = @micropost if micropost == nil %>
+
+
+  <div class="micropost-<%= micropost.id  %>" style="display:none">
+      <%= render 'comments/comment_box_form', box_for: micropost, type: '' %>
+
+      <% micropost.comments.where("parent_id IS ?", nil ).each do |comment| %>
+        <ol class=" micropost_group" >
+          <% if comment.deleted %>
+               <li id="nested_comments"> <strong>UNANIMOUS</strong> <span><%=comment.content%> </span> . <%= time_ago_in_words(comment.created_at) %>   </li>
+          <% else %>
+               <li id="nested_comments">   <%= gravatar_for(comment.user,20) %> <strong><%= link_to comment.user.first_name.upcase %></strong> <span><%= comment.content %> </span> . <%= time_ago_in_words(comment.created_at) %>
+          <% end %>
+
+         <div class="flex_container">
+
+
+           <span id="comment_like_<%= comment.id %>" >
+             <%= render 'likes/likes_reply',reply:comment %>
+           </span>
+
+
+           <span  class="suggestions">
+               <a onclick="display_comment_form(this)" id="<%= comment.id %>" ><i class="far fa-comment"></i> <%= comment.replies.count %> </a>
+           </span>
+           <% if !comment.deleted %>
+                 <% if current_user.admin? || current_user.id == comment.user_id %>
+                     <span class="suggestions">
+                       <%= link_to comment_path(comment,type:'delete'),method: :patch,data: { confirm: 'Are you sure?' },remote:true do %>
+                       <i class="far fa-trash-alt"></i>
+                       <% end %>
+                     </span>
+                 <% end %>
+                 <span  class="suggestions">
+                     <a onclick="display_edit_form(this)" id="<%= comment.id %>" ><i class="far fa-edit"></i></a>
+                 </span>
+
+           <% end %>
+
+         </div>
+
+         <div class="comment_<%= comment.id %> comment_edit"  >
+           <%= render 'comments/comment_box_form', box_for: comment,type: 'replies'  %>
+           <%= render 'layouts/nested_comments', comment: comment %>
+         </div>
+         <div class="edit_<%= comment.id %> comment_edit"  >
+                 <%= render 'comments/comment_edit', box_for: comment,type: 'replies'  %>
+
+         </div>
+
+
+        </ol>
+       <% end %>
+  </div>
